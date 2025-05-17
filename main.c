@@ -25,8 +25,10 @@ void print_cypher(int (*cypher)[COLS], int rows){
   }
 }
 int* transpose_section_1(int (*cypher)[COLS]){
-  // section 1 of the cypher should have no errors.
-  // The idea is to 
+  // Applies the transposition matrix to 
+  // the first section of the cypher.
+  // Returns a pointer to an array that contains
+  // the re-ordered cypher.
   int *arr = malloc(S1_E*17*sizeof(int));
   int index=0; 
   for(int s=0; s < COLS; s++){ // s is the starting point
@@ -41,16 +43,14 @@ int* transpose_section_1(int (*cypher)[COLS]){
   }
   return arr;
 }
-int find(int target, int len, int *arr){
-  for(int i =0; i < len; i++)
-  {
-    if(arr[i] == target){
-      return i;
-    }
-  }
-  return -1;
-}
 char* decode(int* arr, char* convs){ 
+  // Takes in input the array containing
+  // symbols (integers) and maps them
+  // to characters using the rules provided
+  // in the file (first argument)
+  // The file must contain in the first line the
+  // number of rules, followed by the rules in this format:
+  // <int> <char>
   FILE *file = fopen(convs, "r");
   if (file == NULL){
     printf("Erorr in opening the file");
